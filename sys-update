@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+echo "[INFO] Updating..."
+sudo apt update
+
+echo "[INFO] Upgrading..."
+sudo apt upgrade -y
+sudo apt dist-upgrade -y
+
+echo "[INFO] Auto-cleaning..."
+sudo apt autoclean
+
+echo "[INFO] Done!"

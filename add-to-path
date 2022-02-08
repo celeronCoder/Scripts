@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+function isShellScript() {
+  if file --mime-type $1 | grep -q text/x-shellscript$; then
+    echo "[INFO] File is a shell script."
+  else
+    echo "[ERROR] File isn't a shell script"
+    exit 1
+  fi
+}
+
+function isNotEmpty() {
+  if [ -s $1 ]; then
+    echo "[INFO] $1 isn't empty"
+  else
+    echo "[ERROR] $1 is empty"
+  fi
+}
+
+read -p "Filename: " filename
+
+path="$(pwd)/$filename"
+
+function main() {
+  isShellScript $1
+  isNotEmpty $1
+  sudo ln -s $1 /usr/bin/
+  echo "File $1 moved to path"
+  echo
+  ls -alF /usr/bin/$filename
+}
+
+main $path

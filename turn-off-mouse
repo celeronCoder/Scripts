@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+function create_question_dialog_box() {
+  sudo zenity --question --text="Turned off mouse of not?" --ellipsize
+}
+
+function package_exists() {
+  dpkg -s "$1" &> /dev/null
+  return $?
+}
+
+function main() {
+  if package_exists zenity; then
+    create_question_dialog_box
+  else
+    echo "Zenity is not installed"
+  fi
+}
+
+main

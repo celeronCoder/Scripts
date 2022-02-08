@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+function package_exists() {
+  dpkg -s "$1" &> /dev/null
+  return $?
+}
+
+function  remove_package() {
+  sudo apt-get remove $1 -y
+  sudo apt-get autoremove -y
+}
+
+read -p "Package's Name: " package_name
+
+if package_exists $package_name; then
+  read -p "Removing package $package_name, proceed (y/n): " consent
+  if [[ $consent == "Y" || $consent == "y" ]]
+  then
+    remove_package $package_name
+  else
+    echo "Not Removing package $package_name."
+    exit 0
+  fi
+else
+  echo "[ERROR] $package_name doesn't exist."
+  exit 1
+fi
