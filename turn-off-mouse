@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function create_question_dialog_box() {
-  sudo zenity --question --text="Turned off mouse of not?" --ellipsize
+  sudo zenity --question --text="Turned off mouse or not?" --ellipsize
 }
 
 function package_exists() {
